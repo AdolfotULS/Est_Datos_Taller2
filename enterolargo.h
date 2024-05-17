@@ -60,7 +60,59 @@ EnteroLargo *divideEnteroLargo(EnteroLargo *dividendo, EnteroLargo *divisor);
 // EnteroLargo *leeEnteroLargo(nombreArchivo);
 // int escribeEnteroLargo(nombreArchivo, numero);
 // int igualEnteroLargo(numero1, numero2);
-// EnteroLargo *sumaEnteroLargo(numero1, numero2);
+EnteroLargo *sumaEnteroLargo(numero1, numero2){//pruebas del algoritmo para sumar listas
+    //Definicion listas de prueba
+    int lista[MAX]={3,2,5,4,9};
+    int lista2[MAX]={1,2,3,4,5};
+  
+    int num1,total=0,num2,aux,aux1,aux2,extra=0;
+    //For que recorre la lista desde atras hacia adelante para la suma manual
+    for (int i = 4; i >=0 ; i--)
+    {
+        //rescatamos el digito de la lista(Futura lista enlazada)
+        num1=lista[i];
+        num2=lista2[i];
+
+        //verificamos si hay un numero sobrante de la suma anterior
+        if(extra!=0){
+            aux=num1+num2+extra;
+            extra=0;
+        }
+        else{
+            aux=num1+num2;
+        }
+        //si la suma es mayor que 10 separamos los digitos
+        if(aux>10){
+            aux1=aux/10;
+            aux2=aux%10;
+            //el sobrante lo guardamos para sumarlo en la proxima vuelta
+            extra=aux1;
+            //agregamos el digito a la izquierda
+            total=agregar_al_inicio(total,aux2);
+            //reiniciamos variables
+            num1=0;aux=0;num2=0;aux1=0;aux2=0;
+        }
+        else{
+            //agregamos el digito a la izquierda
+            total=agregar_al_inicio(total,aux);
+            num1=0;
+            num2=0;
+            aux=0;
+        }
+    }
+  //Verificacion de que el algoritmo esta funcionando 
+    printf("El resultado de la suma es: %d",total);
+  
+}
+//va moviendo los numeros para ir agregandolos a la izquierda de la variable(Solo para la prueba)
+int agregar_al_inicio(int variable, int n) {
+    int temp = variable;
+    while (temp > 0) {
+        n *= 10;
+        temp /= 10;
+    }
+    return n + variable;
+} 
 // EnteroLargo *restaEnteroLargo(numero1, numero2);
 // EnteroLargo *multiplicaEnteroLargo(multiplicando, multiplicador);
 
@@ -90,4 +142,5 @@ SALIDA: EnteroLargo resultado;
 */
 
 ///////////////////////////////////////////////////////////////////////CHIBI///////////////////////////////////////////////////////////////////////////////
+
 #endif
